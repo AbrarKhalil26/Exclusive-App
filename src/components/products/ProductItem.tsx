@@ -1,9 +1,9 @@
 import Image from "next/image";
 import React from "react";
-import { Button } from "../ui/button";
 import { TiStarFullOutline } from "react-icons/ti";
 import { IProduct } from "@/types/product.type";
 import Link from "next/link";
+import AddToCartBtn from "./AddToCartBtn";
 
 export default function ProductItem({ product }: { product: IProduct }) {
   return (
@@ -19,12 +19,15 @@ export default function ProductItem({ product }: { product: IProduct }) {
             priority={true}
           />
         </Link>
-        <Button className="absolute bottom-0 translate-y-full group-hover:translate-y-0 invisible group-hover:visible rounded-t-none w-full px-12 py-6">
-          Add to Cart
-        </Button>
+        <AddToCartBtn
+          productId={product._id}
+          className="cursor-pointer absolute bottom-0 translate-y-full group-hover:translate-y-0 invisible group-hover:visible rounded-t-none w-full px-12 py-6"
+        />
       </picture>
       <div className="px-3 py-5">
-        <h3 className="font-semibold"><Link href={`/product/${product._id}`}>{product.title}</Link></h3>
+        <h3 className="font-semibold">
+          <Link href={`/product/${product._id}`}>{product.title}</Link>
+        </h3>
         <div className="flex items-center justify-between mt-2">
           <p className="text-sm text-red-500">{product.price} EGP</p>
           <div className="flex items-center gap-1">

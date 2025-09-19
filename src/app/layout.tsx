@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import { Toaster } from "@/components/ui/sonner";
 import Providers from "@/Providers";
+import Footer from "@/components/layout/Footer";
 
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
@@ -26,9 +27,9 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <Providers>
           <Navbar />
-          <main className="pt-28">{children}</main>
+          <main className="pt-28 min-h-screen">{children}</main>
           <Toaster />
-          {/* Footer */}
+          <Footer/>
         </Providers>
       </body>
     </html>

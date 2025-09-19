@@ -12,51 +12,51 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { LoginFormPayload, loginFormSchema } from "@/schema/login.schema";
-import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useActionState, useEffect } from "react";
+import { handleResetPassword } from "@/services/resetPassword.service";
+import {
+  ResetPasswordFormPayload,
+  resetPasswordFormSchema,
+} from "@/schema/resetPass.schema";
+import { formState } from "@/types/resetPass.type";
 
-export default function LoginPage() {
+export default function ResetPasswordPage() {
+  const [action, formAction] = useActionState(handleResetPassword, formState);
   const router = useRouter();
-  const form = useForm<LoginFormPayload>({
-    resolver: zodResolver(loginFormSchema),
+  const form = useForm<ResetPasswordFormPayload>({
+    resolver: zodResolver(resetPasswordFormSchema),
     defaultValues: {
       email: "",
-      password: "",
+      newPassword: "",
     },
   });
+  console.log(action);
+  
 
-  async function onSubmit(values: LoginFormPayload) {
-    try {
-      const res = await signIn("credentials", {
-        email: values.email,
-        password: values.password,
-        redirect: false,
-        callbackUrl: "/",
-      });
-      if (res?.ok) {
-        toast.success("Login successfully", {
-          position: "top-right",
-        });
-        router.push("/");
-      } else {
-        toast.error(res?.error || "Something went wrong", {
+  useEffect(() => {
+    if (action) {
+      if (!action.success && action.message) {
+        toast.error(action.message, {
           position: "top-right",
         });
       }
-    } catch (err) {
-      console.log(err);
+      if (action.success) {
+        toast.success(action.message|| "Changing Password successfully", {
+          position: "top-right",
+        });
+        router.push("/login");
+      }
     }
-  }
+  }, [action]);
 
   return (
     <div className="py-15 lg:py-0 mx-4">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <Image
-            src="/images/login.png"
+            src="/images/Forgot password.svg"
             alt="Login"
             width={600}
             height={600}
@@ -65,16 +65,13 @@ export default function LoginPage() {
           />
           <div>
             <h2 className="text-4xl text-center font-semibold mb-3">
-              Sign in to Exclusive
+              Reset Password
             </h2>
             <p className="text-sm text-center text-gray-600 mb-10">
               Enter your details below
             </p>
             <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="space-y-6"
-              >
+              <form action={formAction} className="space-y-6">
                 <FormField
                   control={form.control}
                   name="email"
@@ -90,10 +87,10 @@ export default function LoginPage() {
                 />
                 <FormField
                   control={form.control}
-                  name="password"
+                  name="newPassword"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Password</FormLabel>
+                      <FormLabel>New Password</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="**********"
@@ -105,9 +102,6 @@ export default function LoginPage() {
                     </FormItem>
                   )}
                 />
-                <p className="text-sm text-blue-800">
-                  <Link href="/forgetPassword">Forget Password</Link>
-                </p>
                 <div className="flex justify-center">
                   <Button className="py-6 px-10 cursor-pointer">Submit</Button>
                 </div>

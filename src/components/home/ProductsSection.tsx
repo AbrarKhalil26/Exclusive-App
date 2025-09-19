@@ -13,27 +13,21 @@ export default async function ProductsSection() {
   const { data: products }: { data: IProduct[] } = await getProducts(8);
 
   console.log(products);
-  
 
   return (
     <div className="py-18 mx-3">
-      <div className="flex items-center justify-between mb-15">
-        <SectionTitle title="Our Products" subtitle="Best Selling Products" />
-        <Button
-          variant={"destructive"}
-          asChild
-          className="bg-red-500 px-12 py-5"
-        >
+      <SectionTitle title="Our Products" subtitle="Best Selling Products" />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 my-15">
+        {products.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </div>
+      <div className="flex justify-center">
+        <Button variant={"destructive"} asChild className="bg-red-500 px-15 py-7">
           <Link href="/products">View All</Link>
         </Button>
       </div>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product}/>
-        ))}
-      </div>
-
       <Separator />
     </div>
   );

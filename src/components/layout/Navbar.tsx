@@ -9,6 +9,14 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
   Sheet,
   SheetContent,
   SheetHeader,
@@ -24,6 +32,8 @@ import { FaRegHeart } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { FiShoppingCart } from "react-icons/fi";
 import { Badge } from "../ui/badge";
+import { useCart } from "@/context/CartContext";
+import { useWishlist } from "@/context/WishlistContext";
 
 const links = [
   {
@@ -39,14 +49,16 @@ const links = [
     label: "Categories",
   },
   {
-    path: "brand",
-    label: "brand",
+    path: "/brands",
+    label: "brands",
   },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
   const { data: session, status } = useSession();
+  const { cartDetails } = useCart();
+  const { wishlistDetails } = useWishlist();
 
   return (
     <section className="py-6 shadow fixed right-0 left-0 z-[100000] bg-white">
@@ -90,26 +102,43 @@ export default function Navbar() {
               <div className="flex items-center gap-4">
                 <Link href="/wishlist" className="relative">
                   <FaRegHeart className="size-5" />
-                  <Badge variant="destructive" className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums">
-                    0
-                  </Badge>
+                  {wishlistDetails && wishlistDetails.count > 0 && (
+                    <Badge
+                      variant="destructive"
+                      className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums"
+                    >
+                      {wishlistDetails?.count}
+                    </Badge>
+                  )}
                 </Link>
                 <Link href="/cart" className="relative">
                   <FiShoppingCart className="size-5" />
-                  <Badge variant="destructive" className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums">
-                    0
-                  </Badge> 
+                  {cartDetails && cartDetails.numOfCartItems > 0 && (
+                    <Badge
+                      variant="destructive"
+                      className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums"
+                    >
+                      {cartDetails?.numOfCartItems}
+                    </Badge>
+                  )}
                 </Link>
-                <Link href="/profile">
-                  <FaRegUser className="size-5" />
-                </Link>
-                {/* <Link href="/profile">{session?.user.name}</Link>
-                <Button
-                  variant="outline"
-                  onClick={() => signOut({ callbackUrl: "/login" })}
-                >
-                  Sign out
-                </Button> */}
+                <DropdownMenu>
+                  <DropdownMenuTrigger>
+                    <FaRegUser className="size-5" />
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="z-[1000000]">
+                    <DropdownMenuLabel>{session?.user.name}</DropdownMenuLabel>
+                    <DropdownMenuSeparator />
+                    <DropdownMenuItem>
+                      <Link href="/profile">Profile</Link>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      onClick={() => signOut({ callbackUrl: "/login" })}
+                    >
+                      Sign out
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
               </div>
             )}
           </div>
@@ -159,22 +188,49 @@ export default function Navbar() {
                     </>
                   ) : (
                     <div className="flex items-center gap-4">
-                      <Link href="/wishlist">
+                      <Link href="/wishlist" className="relative">
                         <FaRegHeart className="size-5" />
+                        {wishlistDetails && wishlistDetails.count > 0 && (
+                          <Badge
+                            variant="destructive"
+                            className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums"
+                          >
+                            {wishlistDetails?.count}
+                          </Badge>
+                        )}
                       </Link>
-                      <Link href="/cart">
+                      <Link href="/cart" className="relative">
                         <FiShoppingCart className="size-5" />
+                        {cartDetails &&
+                          typeof cartDetails.numOfCartItems === "number" &&
+                          cartDetails.numOfCartItems > 0 && (
+                            <Badge
+                              variant="destructive"
+                              className="absolute -top-1/2 -end-1/2 h-4 min-w-4 rounded-full px-1 font-mono tabular-nums"
+                            >
+                              {cartDetails?.numOfCartItems}
+                            </Badge>
+                          )}
                       </Link>
-                      <Link href="/profile">
-                        <FaRegUser className="size-5" />
-                      </Link>
-                      {/* <Link href="/profile">{session?.user.name}</Link>
-                        <Button
-                          variant="outline"
-                          onClick={() => signOut({ callbackUrl: "/login" })}
-                        >
-                          Sign out
-                        </Button> */}
+                      <DropdownMenu>
+                        <DropdownMenuTrigger>
+                          <FaRegUser className="size-5" />
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className="z-[1000000]">
+                          <DropdownMenuLabel>
+                            {session?.user.name}
+                          </DropdownMenuLabel>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>
+                            <Link href="/profile">Profile</Link>
+                          </DropdownMenuItem>
+                          <DropdownMenuItem
+                            onClick={() => signOut({ callbackUrl: "/login" })}
+                          >
+                            Sign out
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </div>
                   )}
                 </div>
