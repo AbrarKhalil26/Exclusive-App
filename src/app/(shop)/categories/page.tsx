@@ -32,8 +32,6 @@ export default async function CategoriesPage() {
             </div>
           ))}
         </div>
-
-        {/* <CategoriesSlider categories={categories} /> */}
       </div>
     </div>
   );
