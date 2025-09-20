@@ -46,4 +46,4 @@ A modern e-commerce web application that provides users with a seamless shopping
 - Orders: Create order, get all orders, get user orders, checkout session.
 
 ### Design
-![Social App Design](https://github.com/AbrarKhalil26/Exclusive-App/blob/main/public/design/screens/design.png)
+![Social App Design](https://github.com/AbrarKhalil26/Exclusive-App/blob/main/public/design/screens/design/design.png)
