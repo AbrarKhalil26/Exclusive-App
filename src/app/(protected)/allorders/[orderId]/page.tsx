@@ -111,27 +111,26 @@ export default async function OrderDetailsPage({
           <TableBody>
             {cartItems.map((item) => {
               const { price, count } = item;
-              const { imageCover, title } = item.product;
               return (
                 <TableRow key={item._id}>
                   <TableCell className="font-medium">
                     <div className="flex items-center gap-5">
                       <Image
-                        src={imageCover}
-                        alt={title}
+                        src={item.product?.imageCover ?? "/placeholder.png"}
+                        alt={item.product?.title ?? "Product image"}
                         className="w-auto object-contain bg-gray-100 rounded-md"
                         priority={true}
                         width={54}
                         height={54}
                       />
-                      <h2 className="truncate">{title}</h2>
+                      <h2 className="truncate">{item.product?.title}</h2>
                     </div>
                   </TableCell>
                   <TableCell>{item.product?.brand.name}</TableCell>
                   <TableCell>{item.product?.category.name}</TableCell>
                   <TableCell className="text-center">{count}</TableCell>
                   <TableCell>{price} EGP</TableCell>
-                  <TableCell>{price * count} EGP</TableCell>
+                  <TableCell>{(price ?? 0) * count} EGP</TableCell>
                 </TableRow>
               );
             })}

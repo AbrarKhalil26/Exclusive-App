@@ -98,7 +98,7 @@ export default function ProfilePage() {
         });
       }
     }
-  }, [action, form, update]);
+  }, [action, form]);
 
   return (
     <div className="my-10 mx-4">
@@ -129,12 +129,21 @@ export default function ProfilePage() {
                 <p className="text-sm">{session?.user.email}</p>
               </div>
             </div>
-            <Button
-              className="px-10 py-6 cursor-pointer"
-              onClick={() => setIsChangePass(true)}
-            >
-              Change Password
-            </Button>
+            {isChangePass ? (
+              <Button
+                className="px-10 py-6 cursor-pointer"
+                onClick={() => setIsChangePass(false)}
+              >
+                Update User
+              </Button>
+            ) : (
+              <Button
+                className="px-10 py-6 cursor-pointer"
+                onClick={() => setIsChangePass(true)}
+              >
+                Change Password
+              </Button>
+            )}
           </div>
 
           <div className="my-12">

@@ -2,7 +2,10 @@
 import { resetPasswordFormSchema } from "@/schema/resetPass.schema";
 import { resetPassStateType } from "@/types/resetPass.type";
 
-export async function handleResetPassword(formState: resetPassStateType, formData: FormData) {
+export async function handleResetPassword(
+  formState: resetPassStateType,
+  formData: FormData
+): Promise<resetPassStateType> {
   const formValues = {
     email: formData.get("email"),
     newPassword: formData.get("newPassword"),
@@ -11,9 +14,13 @@ export async function handleResetPassword(formState: resetPassStateType, formDat
   const parsedData = resetPasswordFormSchema.safeParse(formValues);
 
   if (!parsedData.success) {
+    const fieldErrors = parsedData.error.flatten().fieldErrors;
     return {
       success: false,
-      error: parsedData.error.flatten().fieldErrors,
+      error: {
+        email: fieldErrors.email ?? [],
+        newPassword: fieldErrors.newPassword ?? [],
+      },
       message: null,
     };
   }
@@ -33,16 +40,20 @@ export async function handleResetPassword(formState: resetPassStateType, formDat
     if (!res.ok) {
       return {
         success: false,
-        error: {},
+        error: { email: [], newPassword: [] },
         message: data?.message,
       };
     }
-    return{
+    return {
       success: true,
-      error: {},
+      error: { email: [], newPassword: [] },
       message: data?.message,
-    }
+    };
   } catch (error) {
-    console.log(error);
+    return {
+      success: true,
+      error: { email: [], newPassword: [] },
+      message: (error as string) || "Something went wrong",
+    };
   }
 }

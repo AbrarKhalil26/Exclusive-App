@@ -6,19 +6,19 @@ import { addressFormStateType } from "@/types/address.type";
 export async function handlePayment(
   formState: addressFormStateType,
   formData: FormData
-) {
+) : Promise<addressFormStateType>{
   const shippingAddress = {
     details: formData.get("details"),
     city: formData.get("city"),
     phone: formData.get("phone"),
   };
   const cartId = formData.get("cartId");
-  const paymentMethod = formData.get("paymentMethod");
+  const paymentMethod = formData.get("paymentMethod") as string;
 
   const parsedData = addressFormSchema.safeParse({
     ...shippingAddress,
     cartId,
-    paymentMethod,
+    paymentMethod: paymentMethod as "cash" | "card"| undefined,
   });
   if (!parsedData.success) {
     return {
@@ -26,7 +26,7 @@ export async function handlePayment(
       error: parsedData.error?.flatten().fieldErrors,
       message: null,
       callbackUrl: "/cart",
-      paymentMethod,
+      paymentMethod: paymentMethod as "cash" | "card"| undefined,
     };
   }
 
@@ -51,7 +51,7 @@ export async function handlePayment(
         error: {},
         message: data?.message || "Failed to place order",
         callbackUrl: "/cart",
-        paymentMethod,
+        paymentMethod: paymentMethod as "cash" | "card"| undefined,
       };
     }
     return {
@@ -59,13 +59,15 @@ export async function handlePayment(
       error: {},
       message: data?.message || "Order placed successfully",
       callbackUrl: paymentMethod === 'cash'? '/allorders': data.session.url,
-      paymentMethod,
+      paymentMethod: paymentMethod as "cash" | "card"| undefined,
     };
   } catch (error) {
     return {
       success: false,
       error: {},
-      message: error || "Something went wrong",
+      message: (error as string) || "Something went wrong",
+      callbackUrl: "/cart",
+      paymentMethod: paymentMethod as "cash" | "card"| undefined,
     };
   }
 }

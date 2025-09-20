@@ -5,9 +5,11 @@ export const addressFormState = {
     details: [],
     city: [],
     phone: [],
+    paymentMethod: [],
   },
   message: null,
   callbackUrl: "",
+  paymentMethod: undefined,
 };
 
 export type addressFormStateType = {
@@ -17,7 +19,9 @@ export type addressFormStateType = {
     details?: string[];
     city?: string[];
     phone?: string[];
+    paymentMethod?: string[]; 
   };
   message: string | null;
+  paymentMethod?: "cash" | "card";
   callbackUrl?: string;
 };

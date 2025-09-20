@@ -18,9 +18,16 @@ export async function handleRegister(
   const parsedData = registerFormSchema.safeParse(formValues);
 
   if (!parsedData.success) {
+    const fieldErrors = parsedData.error.flatten().fieldErrors;
     return {
       success: false,
-      error: parsedData.error.flatten().fieldErrors,
+      error: {
+        name: fieldErrors.name ?? [],
+        email: fieldErrors.email ?? [],
+        password: fieldErrors.password ?? [],
+        rePassword: fieldErrors.rePassword ?? [],
+        phone: fieldErrors.phone ?? [],
+      },
       message: null,
     };
   }

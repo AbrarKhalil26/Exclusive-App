@@ -1,37 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🛒 Exclusive App
 
-## Getting Started
+A modern e-commerce web application that provides users with a seamless shopping experience, including authentication, product browsing, wishlist, cart management, and order handling. Built with Next.js and modern libraries for performance and scalability.
 
-First, run the development server:
+### 📌 Project Description
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- This application allows users to:
+- Sign up and sign in securely.
+- Manage personal profiles (update data, reset password).
+- Browse categories, subcategories, and brands.
+- View all products or specific product details.
+- Add/remove products to/from wishlist.
+- Add, update, or remove items from the cart.
+- Place cash orders and checkout securely.
+- Manage and track their own orders.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🚀 Features
+✔️ Secure authentication with NextAuth
+✔️ Form handling and validation using React Hook Form + Zod
+✔️ API integration for products, categories, wishlist, cart, and orders
+✔️ Responsive UI built with TailwindCSS + Radix UI + ShadCN components
+✔️ Real-time notifications using Sonner
+✔️ Wishlist & Cart state management
+✔️ Checkout process with order tracking
+✔️ Token verification and user session handling
+✔️ Modern and scalable architecture with Next.js 15
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 🛠 Tech Stack
+- Next.js 15 – React framework for SSR & routing
+- React 19 – Frontend library
+- NextAuth – Authentication and session management
+- React Hook Form + Zod – Form handling and validation
+- TailwindCSS + Radix UI + ShadCN – Styling and UI components
+- Sonner – Notifications
+- Lucide React & React Icons – Icon system
+- Swiper – Interactive product carousels
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📡 API Endpoints Overview
+- Categories: Get all categories, get specific category, get subcategories by category.
+- Brands: Get all brands.
+- Products: Get all products, get product details.
+- Authentication: Signup, signin, forgot/reset password, update user data.
+- Users: Get all users, verify token.
+- Wishlist: Add/remove product, get wishlist.
+- Cart: Add/update/remove/clear cart, get user cart.
+- Orders: Create order, get all orders, get user orders, checkout session.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-"# Exclusive-App" 
+### Design
+![Social App Design](https://github.com/AbrarKhalil26/Exclusive-App/blob/main/public/design/screens/design.png)

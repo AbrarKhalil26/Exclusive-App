@@ -53,10 +53,10 @@ export default function CheckoutPage() {
           setCartDetails(null);
 
           timeout = setTimeout(() => {
-            router.push(action.callbackUrl);
+            router.push(action.callbackUrl || '/allorders');
           }, 2000);
         }else{
-          window.location.href = action.callbackUrl;
+          window.location.href = action.callbackUrl as string;
         }
       } else if (!action.success && action.message) {
         toast.error(action.message, {

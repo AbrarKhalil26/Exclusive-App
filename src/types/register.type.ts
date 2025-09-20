@@ -1,6 +1,12 @@
 export const formState = {
   success: false,
-  error: {},
+  error: {
+    name: [],
+    email: [],
+    password: [],
+    rePassword: [],
+    phone: [],
+  },
   message: null,
 };
 

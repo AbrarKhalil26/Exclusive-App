@@ -48,8 +48,8 @@ export default async function UserOrdersPage({
                     {order.cartItems.map((item)=>(
                       <div className="flex items-center gap-5" key={item._id}>
                       <Image
-                        src={item.product?.imageCover}
-                        alt={item.product?.title}
+                        src={item.product?.imageCover ?? "/placeholder.png"}
+                        alt={item.product?.title ?? "Product image"}
                         className="w-auto object-contain bg-gray-100 rounded-md"
                         priority={true}
                         width={54}

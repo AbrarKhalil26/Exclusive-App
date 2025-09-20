@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/free-mode";
@@ -10,7 +11,7 @@ import "swiper/css/thumbs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function ProductSlider({ images }: { images: string[] }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const swiperOneOptions = {
     thumbs: { swiper: thumbsSwiper },
