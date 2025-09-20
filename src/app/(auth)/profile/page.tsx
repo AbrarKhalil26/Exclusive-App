@@ -63,9 +63,6 @@ export default function ProfilePage() {
     },
   });
 
-  console.log(action);
-  console.log(actionPassword);
-
   useEffect(() => {
     if (session?.user) {
       form.reset({
@@ -101,7 +98,7 @@ export default function ProfilePage() {
         });
       }
     }
-  }, [action]);
+  }, [action, form, update]);
 
   return (
     <div className="my-10 mx-4">

@@ -17,7 +17,6 @@ export default async function UserOrdersPage({
 }) {
   const { userId } = await params;
   const { data: orders }: { data: IAllOrders[] } = await getUserOrders(userId);
-  console.log(orders);
 
   return (
     <div className="py-5 mx-5">
@@ -42,7 +41,6 @@ export default async function UserOrdersPage({
                 taxPrice,
                 totalOrderPrice,
               } = order;
-              const { _id, name, email, phone } = order.user;
               return (
                 <TableRow key={order._id}>
                   <TableCell className="font-medium">{idx + 1}</TableCell>

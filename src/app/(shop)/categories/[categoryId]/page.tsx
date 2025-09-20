@@ -26,8 +26,6 @@ export default async function CategoryDetailsPage({
   const { data: subCategories }: { data: ICategory[] } =
     await getSubcategoryForSpecificCategory(categoryId);
 
-  console.log(subCategories);
-
   return (
     <div className="my-12 mx-4">
       <div className="container mx-auto">

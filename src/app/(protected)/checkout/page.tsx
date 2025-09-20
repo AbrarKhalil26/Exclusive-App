@@ -35,13 +35,12 @@ export default function CheckoutPage() {
       phone: "",
     },
   });
-  console.log(action);
 
   useEffect(() => {
     if (cartDetails) {
       form.setValue("cartId", cartDetails.cartId);
     }
-  }, [cartDetails]);
+  }, [cartDetails, form]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
@@ -70,7 +69,7 @@ export default function CheckoutPage() {
         clearTimeout(timeout);
       }
     };
-  }, [action, router]);
+  }, [action, router, setCartDetails]);
 
   return (
     <div className="py-15 lg:py-10 mx-4">

@@ -49,7 +49,7 @@ export default function RegisterPage() {
         router.push("/login");
       }
     }
-  }, [action]);
+  }, [action, router]);
 
   return (
     <div className="py-15 lg:py-0 mx-4">

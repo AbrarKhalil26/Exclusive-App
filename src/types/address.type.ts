@@ -7,6 +7,7 @@ export const addressFormState = {
     phone: [],
   },
   message: null,
+  callbackUrl: "",
 };
 
 export type addressFormStateType = {
@@ -18,4 +19,5 @@ export type addressFormStateType = {
     phone?: string[];
   };
   message: string | null;
+  callbackUrl?: string;
 };

@@ -12,7 +12,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Image from "next/image";
-import { signIn } from "next-auth/react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import {
@@ -53,7 +52,7 @@ export default function ForgetPasswordPage() {
         }
       }
     }
-  }, [action]);
+  }, [action, codeInput, router]);
 
   return (
     <div className="py-15 lg:py-0 mx-4">

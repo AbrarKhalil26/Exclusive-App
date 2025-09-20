@@ -14,7 +14,6 @@ import { IAllOrdersResponse } from "@/types/allorders.type";
 
 export default async function AllOrdersPage() {
   const { data: orders }: { data: IAllOrdersResponse } = await fetchAllOrders();
-  console.log(orders);
 
   return (
     <div className="py-5 mx-5">

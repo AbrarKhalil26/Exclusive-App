@@ -10,7 +10,7 @@ import "swiper/css/thumbs";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 export default function ProductSlider({ images }: { images: string[] }) {
-  const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
+  const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
   const swiperOneOptions = {
     thumbs: { swiper: thumbsSwiper },

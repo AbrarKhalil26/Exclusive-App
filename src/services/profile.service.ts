@@ -34,7 +34,7 @@ export type updatePasswordStateType = {
 export async function UpdateUser(
   formState: updateUserStateType,
   formData: FormData
-) {
+) : Promise<updateUserStateType> {
   const formValues = {
     name: formData.get("name"),
     email: formData.get("email"),
@@ -50,8 +50,6 @@ export async function UpdateUser(
       message: null,
     };
   }
-  console.log(formData);
-  
 
   try {
     const token = await getUserToken();
@@ -79,14 +77,18 @@ export async function UpdateUser(
       message: data?.message,
     };
   } catch (error) {
-    console.log(error);
+    return {
+      success: true,
+      error: {},
+      message: (error as string),
+    };
   }
 }
 
 export async function UpdatePassword(
   formState: updatePasswordStateType,
   formData: FormData
-) {
+) : Promise<updatePasswordStateType> {
   const formValues = {
     currentPassword: formData.get("currentPassword"),
     password: formData.get("password"),
@@ -131,6 +133,10 @@ export async function UpdatePassword(
       message: data?.message,
     };
   } catch (error) {
-    console.log(error);
+    return {
+      success: true,
+      error: {},
+      message: (error as string) || "Something went wrong",
+    };
   }
 }

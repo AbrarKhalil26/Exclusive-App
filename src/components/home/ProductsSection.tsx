@@ -3,16 +3,12 @@ import SectionTitle from "../shared/SectionTitle";
 import { Separator } from "@radix-ui/react-separator";
 import { getProducts } from "@/services/Products.service";
 import { IProduct } from "@/types/product.type";
-import Image from "next/image";
-import { TiStarFullOutline } from "react-icons/ti";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ProductItem from "../products/ProductItem";
 
 export default async function ProductsSection() {
   const { data: products }: { data: IProduct[] } = await getProducts(8);
-
-  console.log(products);
 
   return (
     <div className="py-18 mx-3">

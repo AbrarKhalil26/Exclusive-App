@@ -7,8 +7,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { fetchAllOrders } from "@/services/order.service";
 import { IAllOrdersResponse } from "@/types/allorders.type";
 import Image from "next/image";
@@ -21,7 +19,6 @@ export default async function OrderDetailsPage({
   const { orderId } = await params;
   const { data: orders }: { data: IAllOrdersResponse } = await fetchAllOrders();
   const orderDetails = orders.data.filter((item) => item._id === orderId)[0];
-  console.log(orderDetails);
   const {
     paymentMethodType,
     isDelivered,

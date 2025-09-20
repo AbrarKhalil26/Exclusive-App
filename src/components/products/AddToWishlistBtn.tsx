@@ -17,7 +17,6 @@ export default function AddToWishlistBtn({
 }) {
   const { wishlistDetails, getWishlistDetails } = useWishlist();
   const [isWishlist, setIsWishlist] = useState(false);
-  console.log(productId);
 
   async function handleToggleWishlist(productId: string) {
     const { success, message } = isWishlist

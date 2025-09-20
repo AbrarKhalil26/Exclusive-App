@@ -3,7 +3,10 @@
 import { registerFormSchema } from "@/schema/register.schema";
 import { formStateType } from "@/types/register.type";
 
-export async function handleRegister(formState: formStateType, formData: FormData) {
+export async function handleRegister(
+  formState: formStateType,
+  formData: FormData
+): Promise<formStateType> {
   const formValues = {
     name: formData.get("name"),
     email: formData.get("email"),
@@ -37,16 +40,38 @@ export async function handleRegister(formState: formStateType, formData: FormDat
     if (!res.ok) {
       return {
         success: false,
-        error: {},
+        error: {
+          name: [],
+          email: [],
+          password: [],
+          rePassword: [],
+          phone: [],
+        },
         message: data?.message,
       };
     }
-    return{
+    return {
       success: true,
-      error: {},
+      error: {
+        name: [],
+        email: [],
+        password: [],
+        rePassword: [],
+        phone: [],
+      },
       message: data?.message,
-    }
+    };
   } catch (error) {
-    console.log(error);
+    return {
+      success: true,
+      error: {
+        name: [],
+        email: [],
+        password: [],
+        rePassword: [],
+        phone: [],
+      },
+      message: (error as string) || "Something went wrong",
+    };
   }
 }

@@ -32,8 +32,6 @@ export default function ResetPasswordPage() {
       newPassword: "",
     },
   });
-  console.log(action);
-  
 
   useEffect(() => {
     if (action) {
@@ -43,13 +41,13 @@ export default function ResetPasswordPage() {
         });
       }
       if (action.success) {
-        toast.success(action.message|| "Changing Password successfully", {
+        toast.success(action.message || "Changing Password successfully", {
           position: "top-right",
         });
         router.push("/login");
       }
     }
-  }, [action]);
+  }, [action, router]);
 
   return (
     <div className="py-15 lg:py-0 mx-4">

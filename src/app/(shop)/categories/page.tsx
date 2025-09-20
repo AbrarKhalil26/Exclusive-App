@@ -7,7 +7,6 @@ import React from "react";
 
 export default async function CategoriesPage() {
   const { data: categories }: { data: ICategory[] } = await getCategories(50);
-  console.log(categories);
 
   return (
     <div className="my-12 mx-4">
