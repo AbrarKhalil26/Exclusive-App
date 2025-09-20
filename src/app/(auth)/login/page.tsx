@@ -56,7 +56,7 @@ export default function LoginPage() {
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
           <Image
-            src="/images/login.png"
+            src="./images/login.png"
             alt="Login"
             width={600}
             height={600}
